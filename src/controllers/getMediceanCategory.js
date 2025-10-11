@@ -1,20 +1,10 @@
-import type { RequestHandler } from "express";
-import { logger } from "../utils/helpers/logger.ts";
-import { chromium, type Page } from "playwright";
+import { logger } from "../utils/helpers/logger.js";
+import { chromium } from "playwright";
 
-type GetMediceanCategoryType = { data: Array<string> | string };
+const getMediceanCategory = async (request, response) => {
+  let mediceanCategory = [];
 
-type GetMediceanRequestBodyType = { mediceanName: string };
-
-const getMediceanCategory: RequestHandler<
-  unknown,
-  GetMediceanCategoryType,
-  GetMediceanRequestBodyType
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-> = async (request, response) => {
-  let mediceanCategory: Array<string> = [];
-
-  let returnMessage: string = "";
+  let returnMessage = "";
 
   /** Open the chrome browser */
   const browser = await chromium.launch();
@@ -36,7 +26,7 @@ const getMediceanCategory: RequestHandler<
     /** Load the website */
     await page.goto("https://www.1mg.com/");
 
-    const getBreadCrunch = async (pageInstance: Page) => {
+    const getBreadCrunch = async (pageInstance) => {
       /** Get the category element */
       const breadcrumbNav = pageInstance.locator(
         'nav[aria-label="breadcrumb"]'
@@ -141,7 +131,7 @@ const getMediceanCategory: RequestHandler<
 
     browser.close();
   } catch (err) {
-    const error = err as Error;
+    const error = err;
     browser.close();
     logger(error);
     returnMessage = "medicean not found";

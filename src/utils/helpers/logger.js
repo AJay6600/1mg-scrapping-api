@@ -4,6 +4,6 @@
  * an error that occurred during the execution of the program. It contains information about the error,
  * such as the error message and stack trace.
  */
-export const logger = (error: Error) => {
+export const logger = (error) => {
   console.error(error);
 };

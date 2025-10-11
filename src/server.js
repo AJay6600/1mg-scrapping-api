@@ -1,5 +1,5 @@
 import express from "express";
-import scrapRoute from "./routers/scrap.ts";
+import scrapRoute from "./routers/scrap.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;

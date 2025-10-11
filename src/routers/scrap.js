@@ -1,5 +1,5 @@
 import { Router } from "express";
-import getMediceanCategory from "../controllers/getMediceanCategory.ts";
+import getMediceanCategory from "../controllers/getMediceanCategory.js";
 
 const router = Router();
 
