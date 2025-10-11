@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "postinstall": "npx playwright install --with-deps"
   },
   "keywords": [],
   "author": "",
