@@ -185,8 +185,9 @@ function App() {
       justify={category ? "center" : "space-between"}
       align="middle"
       className="h-[100vh] bg-[#242424] overflow-auto px-2"
+      gutter={[0, 15]}
     >
-      <Col span={10} className="mr-3">
+      <Col xs={22} lg={10} className="lg:mr-3">
         <Card className="bg-[#1f1f1f] border-black shadow-lg">
           <form onSubmit={handleSubmit(handleGetCategory)}>
             <Row justify="center" align="middle" gutter={[0, 20]}>
@@ -293,7 +294,7 @@ function App() {
       </Col>
 
       {category && Array.isArray(category) && category.length > 0 && (
-        <Col span={13}>
+        <Col xs={22} lg={13}>
           <Card size="small" className="bg-[#1f1f1f] border-black shadow-lg">
             <Row
               className="text-white p-4 rounded-md mt-3 max-h-[500px] overflow-auto"
