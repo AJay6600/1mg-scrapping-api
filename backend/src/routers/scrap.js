@@ -4,6 +4,6 @@ import getMediceanCategory from "../controllers/getMediceanCategory.js";
 const router = Router();
 
 /** get categories of the Medicean */
-router.get("/getCategory", getMediceanCategory);
+router.post("/getCategory", getMediceanCategory);
 
 export default router;

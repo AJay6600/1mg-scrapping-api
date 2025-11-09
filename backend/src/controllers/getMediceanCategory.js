@@ -7,7 +7,7 @@ const getMediceanCategory = async (request, response) => {
   let returnMessage = "";
 
   /** Open the chrome browser */
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ headless: false });
 
   try {
     const { mediceanName } = request.body;
