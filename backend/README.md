@@ -1,15 +1,11 @@
-# Start App
+# Backend
 
-follow the following steps to start backend
+## Getting started
 
-## 1. Move into frontend folder
+Run following commands to start using the repo.
 
-``` cd backend ```
-
-## 2. Install dependencies
-
-``` npm i ```
-
-## 3. Run project
-
-``` npm run dev ```
+```bash
+cd backend
+npm i
+npm run dev
+```
