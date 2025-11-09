@@ -23,4 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 
+# 🔒 Environment files
 .env
+.env.*
+!.env.example
+
+# If your env files are inside subfolders (like frontend/ or backend/)
+frontend/.env
+frontend/.env.*
+backend/.env
+backend/.env.*
+!frontend/.env.example
+!backend/.env.example

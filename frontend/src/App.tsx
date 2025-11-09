@@ -115,6 +115,16 @@ function App() {
       };
 
       reader.readAsArrayBuffer(formData.inputFile.file);
+
+      if (
+        category &&
+        Array.isArray(category) &&
+        category.length > 0 &&
+        !isPending
+      ) {
+        console.log("reseting");
+        reset();
+      }
     } catch (error) {
       const err = error as Error;
       message.error(err.message);
@@ -153,16 +163,50 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
+  /** Function to download the template file */
+  const handleDownloadTemplate = () => {
+    // Static data
+    const data = [{ name: "Paracetamol" }, { name: "Amoxicillin" }];
+
+    if (!data || data.length === 0) {
+      alert("No data available to export!");
+      return;
+    }
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    XLSX.writeFile(workbook, "template.xlsx");
+  };
+
   return (
     <Row
       justify={category ? "center" : "space-between"}
       align="middle"
-      className="h-[98vh] bg-[#242424] overflow-auto px-2"
+      className="h-[100vh] bg-[#242424] overflow-auto px-2"
     >
       <Col span={10} className="mr-3">
         <Card className="bg-[#1f1f1f] border-black shadow-lg">
           <form onSubmit={handleSubmit(handleGetCategory)}>
             <Row justify="center" align="middle" gutter={[0, 20]}>
+              <Col span={12}>
+                <Text className="text-white text-lg font-semibold flex justify-start">
+                  Upload File
+                </Text>
+              </Col>
+
+              <Col span={12} className="flex justify-end">
+                <Button
+                  icon={<IoMdDownload size={16} />}
+                  type="primary"
+                  className="bg-[#1f1f1f] border-white"
+                  onClick={handleDownloadTemplate}
+                >
+                  Download template
+                </Button>
+              </Col>
+
               <Col span={24}>
                 <Upload
                   name="inputFile"
@@ -215,18 +259,33 @@ function App() {
                 Array.isArray(category) &&
                 category.length > 0 &&
                 !isPending && (
-                  <Button
-                    icon={<IoMdDownload size={22} />}
-                    disabled={!watch("inputFile")}
-                    loading={isPending}
-                    type="primary"
-                    className="w-full text-white"
-                    onClick={() => {
-                      handleDownloadExcel();
-                    }}
-                  >
-                    Download xlsx
-                  </Button>
+                  <>
+                    <Col span={24}>
+                      <Button
+                        icon={<IoMdDownload size={22} />}
+                        type="primary"
+                        className="w-full text-white"
+                        onClick={() => {
+                          handleDownloadExcel();
+                        }}
+                      >
+                        Download xlsx
+                      </Button>
+                    </Col>
+
+                    <Col span={24}>
+                      <Button
+                        type="primary"
+                        className="w-full text-white"
+                        onClick={() => {
+                          reset();
+                          setCategory([]);
+                        }}
+                      >
+                        Reset form
+                      </Button>
+                    </Col>
+                  </>
                 )}
             </Row>
           </form>
